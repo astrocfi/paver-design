@@ -6,8 +6,8 @@ import sys
 
 np.set_printoptions(linewidth=np.inf)
 
-cur_x = 0
-cur_y = -2
+global_start_x = 160
+global_start_y = -2
 
 cur_pat = 0
 
@@ -130,7 +130,15 @@ result_color = np.zeros((final_rows, final_cols, 3), dtype=int)
 
 unique_id = 1000
 
-while cur_y < final_rows+tile_rows*int(final_cols/tile_cols):
+cur_x = global_start_x
+cur_y = global_start_y
+
+start_offset = 30
+cur_x -= step1_x * start_offset
+cur_y -= step1_y * start_offset
+cur_pat = (cur_pat-start_offset) % len(patterns)
+
+while cur_y < final_rows+tile_rows*int(final_cols/tile_cols)*2:
     last_start_x = cur_x
     last_start_y = cur_y
     last_cur_pat = cur_pat
@@ -201,7 +209,8 @@ img[-1,  :, :] = 0
 img[ :,  0, :] = 0
 img[ :, -1, :] = 0
 
-plt.figure(figsize=(10,7.5))
+# plt.figure(figsize=(10,7.5))
+plt.figure(figsize=(10*3, 7.5*3))
 pltimg = plt.imshow(img)
 plt.axis('off')
 plt.tight_layout()
