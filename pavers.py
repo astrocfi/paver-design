@@ -6,8 +6,10 @@ import sys
 
 np.set_printoptions(linewidth=np.inf)
 
-global_start_x = 160
-global_start_y = -2
+# global_start_x = 160
+# global_start_y = -2
+global_start_x = 0
+global_start_y = 0
 
 cur_pat = 0
 
